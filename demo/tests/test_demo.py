@@ -23,5 +23,5 @@ def test_health_check_server_error(mocked_health_check):
     """
     client = TestClient(get_app())
     response = client.get("/api/health")
-    assert response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR
-    assert response.json() == {"detail": "API is not healthy"}
+    @pytest.mark.parametrize("response.status_code, expected_status_code", [(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)])
+    @pytest.mark.parametrize("response.json(), expected_json", [(response.json(), {"detail": "API is not healthy"})])

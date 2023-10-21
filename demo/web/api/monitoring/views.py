@@ -13,4 +13,4 @@ async def health_check() -> dict:
     try:
         return {"status": "OK"}
     except Exception:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="API is not healthy") from None
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="API is not healthy")

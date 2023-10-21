@@ -1,5 +1,8 @@
 from fastapi.routing import APIRouter
 
+def hello_world():
+    return "Hello, World!"
+
 from demo.web.api import monitoring
 
 api_router = APIRouter()

@@ -5,3 +5,4 @@ from demo.web.api.monitoring.views import hello_world
 
 api_router = APIRouter()
 api_router.include_router(monitoring.router)
+api_router.get("/hello", response_model=str)(hello_world)

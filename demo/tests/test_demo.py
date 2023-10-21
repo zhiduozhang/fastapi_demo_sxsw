@@ -24,4 +24,4 @@ def test_health_check_server_error(mocked_health_check):
     client = TestClient(get_app())
     response = client.get("/api/health")
     assert response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR
-    assert response.json() == {"detail": "API is not healthy"}
+    pytest.assert response.json() == {"detail": "API is not healthy"}

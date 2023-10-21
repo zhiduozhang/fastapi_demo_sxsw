@@ -2,7 +2,16 @@ from typing import Any, AsyncGenerator
 
 import pytest
 from fastapi import FastAPI
-from httpx import AsyncClient
+@pytest.mark.asyncio
+async def test_hello_world(client: AsyncClient):
+    """
+    Test function for the hello world endpoint.
+
+    :param client: the test client.
+    """
+    response = await client.get("/api/monitoring/hello")
+    assert response.status_code == 200
+    assert response.text == "hello world!"
 
 from demo.web.application import get_app
 

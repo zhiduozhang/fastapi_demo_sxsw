@@ -1,7 +1,10 @@
 import pytest
 from fastapi import FastAPI
+from fastapi.testclient import TestClient
 from httpx import AsyncClient
 from starlette import status
+from demo.web.application import get_app
+from unittest.mock import patch
 
 
 def test_health_check():

@@ -1,17 +1,27 @@
 import pytest
 from fastapi import FastAPI
+from fastapi.testclient import TestClient
 from httpx import AsyncClient
 from starlette import status
+from demo.web.application import get_app
+from unittest.mock import patch
 
 
-@pytest.mark.anyio
-async def test_health(client: AsyncClient, fastapi_app: FastAPI) -> None:
+def test_health_check():
     """
     Checks the health endpoint.
-
-    :param client: client for the app.
-    :param fastapi_app: current FastAPI application.
     """
-    url = fastapi_app.url_path_for("health_check")
-    response = await client.get(url)
+    client = TestClient(get_app())
+    response = client.get("/api/health")
     assert response.status_code == status.HTTP_200_OK
+    assert response.json() == {"status": "OK"}
+
+@patch('demo.web.api.monitoring.views.health_check', side_effect=Exception('Server error'))
+def test_health_check_server_error(mocked_health_check):
+    """
+    Checks the health endpoint for server error.
+    """
+    client = TestClient(get_app())
+    response = client.get("/api/health")
+    assert response.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR
+    pytest.assert response.json() == {"detail": "API is not healthy"}

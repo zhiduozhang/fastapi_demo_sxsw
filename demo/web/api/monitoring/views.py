@@ -11,6 +11,7 @@ def health_check() -> None:
     It returns 200 if the project is healthy.
     """
 
+
 @router.get("/hello")
 def hello_world() -> str:
     """
@@ -18,4 +19,4 @@ def hello_world() -> str:
 
     It returns 'hello world!'.
     """
-    return 'hello world!'
+    return "hello world!"
